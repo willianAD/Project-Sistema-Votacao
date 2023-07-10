@@ -4,6 +4,7 @@ public abstract class PessoaCandidata extends Pessoa {
   public int numero;
   public int votos;
 
+  /** Not a javadoc (ignored). */
   public PessoaCandidata(String nome, int numero) {
     super.nome = nome;
     this.numero = numero;
