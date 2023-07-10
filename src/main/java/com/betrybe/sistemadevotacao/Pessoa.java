@@ -1,5 +1,5 @@
 package com.betrybe.sistemadevotacao;
 
-public class Pessoa {
-  
+public abstract class Pessoa {
+
 }
