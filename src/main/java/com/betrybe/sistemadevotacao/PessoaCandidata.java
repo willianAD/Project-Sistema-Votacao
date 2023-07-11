@@ -1,6 +1,6 @@
 package com.betrybe.sistemadevotacao;
 
-public abstract class PessoaCandidata extends Pessoa {
+public class PessoaCandidata extends Pessoa {
   public int numero;
   public int votos;
 
@@ -11,8 +11,12 @@ public abstract class PessoaCandidata extends Pessoa {
     this.votos = 0;
   }
 
-  public void receberVoto() {
-    this.votos += 1;
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
   }
 
   public int getNumero() {
@@ -29,5 +33,9 @@ public abstract class PessoaCandidata extends Pessoa {
 
   public void setVotos(int votos) {
     this.votos = votos;
+  }
+
+  public void receberVoto() {
+    this.votos += 1;
   }
 }
