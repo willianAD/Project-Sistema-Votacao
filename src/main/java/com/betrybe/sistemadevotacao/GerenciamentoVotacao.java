@@ -1,7 +1,6 @@
 package com.betrybe.sistemadevotacao;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
   private ArrayList<PessoaCandidata> pessoasCandidatas;
@@ -10,9 +9,9 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
 
   /** Not a javadoc (ignored). */
   public GerenciamentoVotacao() {
-    pessoasCandidatas = new ArrayList<>();
-    pessoasEleitoras = new ArrayList<>();
-    cpfsComputados = new ArrayList<>();
+    pessoasCandidatas = new ArrayList<PessoaCandidata>();
+    pessoasEleitoras = new ArrayList<PessoaEleitora>();
+    cpfsComputados = new ArrayList<String>();
   }
 
   /** Not a javadoc (ignored). */
@@ -20,11 +19,11 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
     for (PessoaCandidata candidata : pessoasCandidatas) {
       if (candidata.getNumero() == numero) {
         System.out.println("Número da pessoa candidata já utilizado!");
-      } else {
-        PessoaCandidata novaPessoaCandidata = new PessoaCandidata(nome, numero);
-        pessoasCandidatas.add(novaPessoaCandidata);
+        break;
       }
     }
+    PessoaCandidata novaPessoaCandidata = new PessoaCandidata(nome, numero);
+    pessoasCandidatas.add(novaPessoaCandidata);
   }
 
   /** Not a javadoc (ignored). */
@@ -32,15 +31,15 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
     for (PessoaEleitora eleitora : pessoasEleitoras) {
       if (eleitora.getCpf().equals(cpf)) {
         System.out.println("Pessoa eleitora já cadastrada!");
-      } else {
-        PessoaEleitora novaPessoaEleitora = new PessoaEleitora(nome, cpf);
-        pessoasEleitoras.add(novaPessoaEleitora);
+        break;
       }
     }
+    PessoaEleitora novaPessoaEleitora = new PessoaEleitora(nome, cpf);
+    pessoasEleitoras.add(novaPessoaEleitora);
   }
 
   private PessoaCandidata getPessoaCandidata(int numero) {
-    for (PessoaCandidata candidata : pessoasCandidatas) {
+    for (PessoaCandidata candidata : this.pessoasCandidatas) {
       if (candidata.getNumero() == numero) {
         return candidata;
       }
@@ -50,19 +49,17 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
 
   /** Not a javadoc (ignored). */
   public void votar(String cpfPessoaEleitora, int numeroPessoaCandidata) {
-    for (String cpf : cpfsComputados) {
-      if (Objects.equals(cpf, cpfPessoaEleitora)) {
-        System.out.println("Pessoa eleitora já votou!");
-      } else {
-        PessoaCandidata candidata = getPessoaCandidata(numeroPessoaCandidata);
-        if (candidata == null) {
-          System.out.println("Pessoa candidata não encontrada!");
-        } else {
-          candidata.receberVoto();
-          cpfsComputados.add(cpfPessoaEleitora);
-        }
-      }
+    if (cpfsComputados.contains(cpfPessoaEleitora)) {
+      System.out.println("Pessoa eleitora já votou!");
+      return;
     }
+    PessoaCandidata candidata = getPessoaCandidata(numeroPessoaCandidata);
+    if (candidata == null) {
+      System.out.println("Pessoa candidata não encontrada!");
+      return;
+    }
+    candidata.receberVoto();
+    cpfsComputados.add(cpfPessoaEleitora);
   }
 
   /** Not a javadoc (ignored). */
@@ -70,7 +67,7 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
     int totalVotos = cpfsComputados.size();
     if (totalVotos > 0) {
       for (PessoaCandidata candidata : pessoasCandidatas) {
-        int percentual = Math.round((float) candidata.getVotos() / totalVotos * 100);
+        double percentual = Math.round((double) candidata.getVotos() / totalVotos * 100);
         System.out.println("Nome: " + candidata.getNome() + " - " + candidata.getVotos()
             + " votos ( " + percentual + "% )");
       }
