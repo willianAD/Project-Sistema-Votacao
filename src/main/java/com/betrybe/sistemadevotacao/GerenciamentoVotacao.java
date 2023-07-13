@@ -67,11 +67,12 @@ public class GerenciamentoVotacao implements GerenciamentoVotacaoInterface {
     int totalVotos = cpfsComputados.size();
     if (totalVotos > 0) {
       for (PessoaCandidata candidata : pessoasCandidatas) {
-        double percentual = Math.round((double) candidata.getVotos() / totalVotos * 100);
-        System.out.println("Nome: " + candidata.getNome() + " - " + candidata.getVotos()
-            + " votos ( " + percentual + "% )");
+        int votos = candidata.getVotos();
+        double percentual = Math.round((double) votos / totalVotos * 100);
+        System.out.println(
+            "Nome: " + candidata.getNome() + " - " + votos + " votos ( " + percentual + "% )");
       }
-      System.out.println("Total de Votos: " + totalVotos);
+      System.out.println("Total de votos: " + totalVotos);
     } else {
       System.out.println("É preciso ter pelo menos um voto para mostrar o resultado.");
     }
