@@ -20,7 +20,7 @@ public class Principal {
     System.out.println("2 - Não");
     System.out.println("Entre com o número correspondente à opção desejada:");
     String select1 = scanner.nextLine();
-    if (select1 == "1") {
+    if (select1.equals("1")) {
       System.out.println("Entre com o nome da pessoa candidata:");
       String nomeInput = scanner.nextLine();
       String nome = nomeInput;
@@ -29,7 +29,7 @@ public class Principal {
       int numero = Integer.parseInt(numeroInput);
       gerenciamento.cadastrarPessoaCandidata(nome, numero);
       menuCandidato();
-    } else if (select1 == "2") {
+    } else if (select1.equals("2")) {
       menuEleitora();
     } else {
       scanner.close();
@@ -42,7 +42,7 @@ public class Principal {
     System.out.println("2 - Não");
     System.out.println("Entre com o número correspondente à opção desejada:");
     String select2 = scanner.nextLine();
-    if (select2 == "1") {
+    if (select2.equals("1")) {
       System.out.println("Entre com o nome da pessoa eleitora:");
       String nomeInput = scanner.nextLine();
       String nome = nomeInput;
@@ -51,7 +51,7 @@ public class Principal {
       String cpf = cpfInput;
       gerenciamento.cadastrarPessoaEleitora(nome, cpf);
       menuEleitora();
-    } else if (select2 == "2") {
+    } else if (select2.equals("2")) {
       menuVoto();
     } else {
       scanner.close();
@@ -64,7 +64,7 @@ public class Principal {
     System.out.println("2 - Resultado Parcial");
     System.out.println("3 - Finalizar Votação");
     String select3 = scanner.nextLine();
-    if (select3 == "1") {
+    if (select3.equals("1")) {
       System.out.println("Entre com o cpf da pessoa eleitora:");
       String cpfInput = scanner.nextLine();
       String cpf = cpfInput;
@@ -74,10 +74,10 @@ public class Principal {
       gerenciamento.votar(cpf, numero);
       votos++;
       menuVoto();
-    } else if (select3 == "2") {
+    } else if (select3.equals("2")) {
       gerenciamento.mostrarResultado();
       menuVoto();
-    } else if (select3 == "3") {
+    } else if (select3.equals("3")) {
       if (votos == 0) {
         gerenciamento.mostrarResultado();
         menuVoto();
